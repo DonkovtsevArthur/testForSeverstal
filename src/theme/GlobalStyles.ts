@@ -38,11 +38,11 @@ export const GlobalStyles = createGlobalStyle`
     color: ${(p) => p.theme.colors.lavender};
   }
 
-  /* a {
+  a {
     text-decoration: none;
     cursor: pointer;
     transition: color .15s ease-out;
-  } */
+  }
 
   button {
     border: none;

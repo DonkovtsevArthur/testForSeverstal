@@ -7,8 +7,10 @@ type Theme = {
     lavender: string;
     lavenderLight: string;
     blue: string;
-    blueSvgActive: string;
-    blueSvgHover: string;
+    blueLight: string;
+    blueVeryLight: string;
+    blueNatural: string;
+    blueMediumLight: string;
     blueStroke: string;
   };
   fonts: {
@@ -28,8 +30,10 @@ export const theme: Theme = {
     lavender: "#676DAA",
     lavenderLight: "#EEF1FA",
     blue: "#272D67",
-    blueSvgActive: "#3869DE",
-    blueSvgHover: "#7BA2FF",
+    blueLight: "#91A0C9",
+    blueVeryLight: "#E0E6F6",
+    blueNatural: "#3869DE",
+    blueMediumLight: "#7BA2FF",
     blueStroke: "#5285FF",
   },
   fonts: { RobotoRegular: "Roboto Regular", RobotoMedium: "Roboto Medium" },

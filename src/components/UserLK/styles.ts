@@ -37,17 +37,17 @@ const UserMenu = styled.div`
       transform: rotate(180deg);
     }
     path {
-      fill: ${({ theme }) => theme.colors.blueSvgHover};
+      fill: ${({ theme }) => theme.colors.blueMediumLight};
     }
   }
   &:active {
     path {
-      fill: ${({ theme }) => theme.colors.blueSvgActive};
+      fill: ${({ theme }) => theme.colors.blueNatural};
     }
   }
   &:focus {
     path {
-      fill: ${({ theme }) => theme.colors.blueSvgHover};
+      fill: ${({ theme }) => theme.colors.blueMediumLight};
       stroke: ${({ theme }) => theme.colors.blueStroke};
     }
   }

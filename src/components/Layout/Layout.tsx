@@ -1,14 +1,17 @@
 import React from "react";
 import Header from "components/Header";
 
-import { LayoutWrapper } from "./styles";
+import { ContentWrapper, LayoutWrapper, Content } from "./styles";
+import SideBar from "components/SideBar";
 
 const Layout: React.FC = ({ children }) => {
   return (
     <LayoutWrapper>
       <Header />
-      <div>Layout</div>
-      {children}
+      <ContentWrapper>
+        <SideBar />
+        <Content>{children}</Content>
+      </ContentWrapper>
     </LayoutWrapper>
   );
 };

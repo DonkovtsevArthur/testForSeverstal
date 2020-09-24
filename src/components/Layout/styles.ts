@@ -5,4 +5,14 @@ const LayoutWrapper = styled.div`
   flex-direction: column;
 `;
 
-export { LayoutWrapper };
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const Content = styled.div`
+  display: flex;
+  width: 80%;
+`;
+
+export { LayoutWrapper, ContentWrapper, Content };
