@@ -14,6 +14,8 @@ const SideBarLink = styled(NavLink)`
   height: 60px;
   border-radius: 0px 10px 10px 0px;
   font-family: ${({ theme }) => theme.fonts.RobotoMedium};
+  font-style: normal;
+  font-weight: 500;
   color: ${({ theme }) => theme.colors.blueLight};
   padding-left: 32px;
   border: 1px solid transparent;

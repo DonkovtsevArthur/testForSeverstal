@@ -9,9 +9,11 @@ type Theme = {
     blue: string;
     blueLight: string;
     blueVeryLight: string;
+    blueSuperLight: string;
     blueNatural: string;
     blueMediumLight: string;
     blueStroke: string;
+    blueWhite: string;
   };
   fonts: {
     RobotoRegular: "Roboto Regular";
@@ -32,6 +34,8 @@ export const theme: Theme = {
     blue: "#272D67",
     blueLight: "#91A0C9",
     blueVeryLight: "#E0E6F6",
+    blueSuperLight: "#E3EBF7",
+    blueWhite: "#F7F9FF",
     blueNatural: "#3869DE",
     blueMediumLight: "#7BA2FF",
     blueStroke: "#5285FF",

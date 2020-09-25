@@ -1,3 +1,5 @@
+import Analyst from "pages/Analyst";
+import Push from "pages/Push";
 import React from "react";
 import AnalystIcon from "ui/icons/AnalystIcon";
 import PushIcon from "ui/icons/PushIcon";
@@ -5,9 +7,9 @@ import { getIsActive } from "./helpers";
 import { SideBarLink, SideBarWrapper } from "./styles";
 import { SideBarType } from "./types";
 
-const sidebar: SideBarType[] = [
-  { title: "Аналитика", code: "", Icon: AnalystIcon },
-  { title: "Уведомления", code: "push", Icon: PushIcon },
+export const sidebar: SideBarType[] = [
+  { title: "Аналитика", code: "", Icon: AnalystIcon, Component: Analyst },
+  { title: "Уведомления", code: "push", Icon: PushIcon, Component: Push },
 ];
 
 const SideBar = () => {

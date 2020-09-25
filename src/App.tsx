@@ -3,7 +3,8 @@ import { ThemeProvider } from "styled-components";
 import Layout from "./components/Layout/Layout";
 import { theme } from "./theme";
 import { GlobalStyles } from "./theme/GlobalStyles";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { sidebar } from "components/SideBar/SideBar";
 
 function App() {
   return (
@@ -11,7 +12,11 @@ function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <Layout>
-          <div>Page</div>
+          <Switch>
+            {sidebar.map(({ title, code, Component }) => (
+              <Route exact={!code} path={`/${code}`} key={title} component={Component} />
+            ))}
+          </Switch>
         </Layout>
       </ThemeProvider>
     </Router>
