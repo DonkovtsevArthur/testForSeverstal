@@ -1,11 +1,11 @@
-import Form from "components/Form";
+import GlobalAds from "components/GlobalAds";
 import React, { useMemo } from "react";
 import { TabPanel } from "react-tabs";
 import { Tab, TabList, Tabs } from "ui/tabs";
 import { TabListWrapper } from "./styles";
 
 const tabs = [
-  { title: "Глобальные объявления", Component: () => <Form /> },
+  { title: "Глобальные объявления", Component: () => <GlobalAds /> },
   { title: "Отправить на группу", Component: () => <h2>Отправить на группу</h2> },
   { title: "Контент-уведомления", Component: () => <h2>Контент-уведомления</h2> },
 ];

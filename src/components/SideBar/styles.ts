@@ -17,7 +17,7 @@ const SideBarLink = styled(NavLink)`
   font-style: normal;
   font-weight: 500;
   color: ${({ theme }) => theme.colors.blueLight};
-  padding-left: 32px;
+  padding-left: 31px;
   border: 1px solid transparent;
   transition: color 0.65s, background-color 0.65s ease;
   &:not(:last-child) {

@@ -13,6 +13,8 @@ export const GlobalStyles = createGlobalStyle`
     font-family: ${({ theme }) => theme.fonts.RobotoRegular};
     font-size: 16px;
     line-height: 19px;
+    font-style: normal;
+    font-weight: normal;
     background-color: ${({ theme }) => theme.colors.white};
     color: ${({ theme }) => theme.colors.lavender};
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -25,6 +27,31 @@ export const GlobalStyles = createGlobalStyle`
     outline: none;
   }
 
+  input, 
+  textarea {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    color:  ${({ theme }) => theme.colors.blue};
+    background-color: ${({ theme }) => theme.colors.white};
+    border: 1px solid ${({ theme }) => theme.colors.blueDark};
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 18px 20px 20px;
+    width: 100%;
+    transition: border-color 0.25s ease;
+
+    &::placeholder {
+      font-size: 14px;
+      color: ${(p) => p.theme.colors.blueLight};
+    }
+
+
+    &:focus {
+      border-color: ${({ theme }) => theme.colors.blueStroke};
+    }
+  
+  }
 
 
   p {
