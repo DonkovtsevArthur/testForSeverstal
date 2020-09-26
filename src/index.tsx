@@ -1,3 +1,4 @@
+import { App } from "./app";
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
@@ -7,7 +8,6 @@ import { ThemeProvider } from "styled-components";
 import { theme } from "theme";
 import { GlobalStyles } from "theme/GlobalStyles";
 
-import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(

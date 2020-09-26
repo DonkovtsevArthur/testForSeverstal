@@ -1,7 +1,7 @@
 import React from "react";
 import { Icons } from "./type";
 
-const PushIcon: React.FC<Icons> = ({ width = "35", height = "35" }) => {
+export const PushIcon: React.FC<Icons> = ({ width = "35", height = "35" }) => {
   return (
     <svg width={width} height={height} viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -16,5 +16,3 @@ const PushIcon: React.FC<Icons> = ({ width = "35", height = "35" }) => {
     </svg>
   );
 };
-
-export default PushIcon;

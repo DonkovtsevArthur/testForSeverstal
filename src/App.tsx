@@ -3,7 +3,7 @@ import Layout from "./components/Layout/Layout";
 import { Route, Switch } from "react-router-dom";
 import { sidebar } from "components/SideBar/SideBar";
 
-function App() {
+export function App() {
   return (
     <Layout>
       <Switch>
@@ -14,5 +14,3 @@ function App() {
     </Layout>
   );
 }
-
-export default App;

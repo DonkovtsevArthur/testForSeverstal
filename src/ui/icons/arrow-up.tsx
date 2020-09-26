@@ -1,7 +1,7 @@
 import React from "react";
 import { Icons } from "./type";
 
-const ArrowUpIcon: React.FC<Icons> = ({ fill = "#5285FF", width = "13", height = "8" }) => {
+export const ArrowUpIcon: React.FC<Icons> = ({ fill = "#5285FF", width = "13", height = "8" }) => {
   return (
     <svg width={width} height={height} viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
@@ -11,5 +11,3 @@ const ArrowUpIcon: React.FC<Icons> = ({ fill = "#5285FF", width = "13", height =
     </svg>
   );
 };
-
-export default ArrowUpIcon;

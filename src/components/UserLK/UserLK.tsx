@@ -1,5 +1,5 @@
 import React from "react";
-import ArrowUpIcon from "ui/icons/ArrowUp";
+import ArrowUpIcon from "ui/icons/arrow-up";
 
 import { UserWrapper, UserName, UserAvatar, UserMenu } from "./styles";
 

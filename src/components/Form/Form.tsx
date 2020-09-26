@@ -1,9 +1,9 @@
 import React, { memo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import Input from "ui/Form/Input";
-import InputFile from "ui/Form/InputFile";
-import Textarea from "ui/Form/Textarea";
+import Input from "ui/form/input";
+import InputFile from "ui/form/input-file";
+import Textarea from "ui/form/textarea";
 import View from "components/View";
 
 import { FormBtn, FormItem, FormWrapper } from "./styles";

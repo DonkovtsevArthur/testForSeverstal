@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Button } from "ui/Btn";
+import { Button } from "ui/button";
 
 const FormWrapper = styled.form``;
 

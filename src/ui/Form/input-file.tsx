@@ -1,7 +1,11 @@
+import React, { memo } from "react";
+import OverviewIcon from "ui/icons/OverviewIcon";
 import styled from "styled-components";
-import { FormWrapperElement, InputValue } from "..";
+import { FormWrapperElement, InputValue, Label } from ".";
 
-const FormWrapperElementFile = styled(FormWrapperElement)`
+const FormWrapperElementFile = styled(
+  
+)`
   position: relative;
   width: auto;
 `;
@@ -81,4 +85,24 @@ const HelperText = styled.div`
     }
   }
 `;
-export { InputValueFile, FormWrapperElementFile, HelperText };
+
+type InputFileType = {
+  label: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+};
+
+export const InputFile: React.FC<InputFileType> = memo(({ label = "", onChange = () => {} }) => {
+  return (
+    <FormWrapperElementFile>
+      <InputValueFile id="file" type="file" accept=".png" onChange={onChange} />
+      <Label htmlFor="file">
+        <OverviewIcon />
+        {label}
+      </Label>
+      <HelperText>
+        <p> Значок в высоком разрешении</p>
+        <p>512х512 px; 32-разрядный PNG</p>
+      </HelperText>
+    </FormWrapperElementFile>
+  );
+});

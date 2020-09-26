@@ -1,7 +1,7 @@
 import React, { memo } from "react";
+import styled from "styled-components";
 import ClearText from "ui/icons/ClearText";
-import { FormValueWrapper, FormWrapperElement, InputValue, Label } from "..";
-import { ClearIcon } from "./styles";
+import { FormWrapperElement, Label, FormValueWrapper, InputValue } from ".";
 
 type Input = {
   label?: string;
@@ -12,6 +12,12 @@ type Input = {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onClear?: () => void;
 };
+
+const ClearIcon = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+`;
 
 const Input: React.FC<Input> = ({
   label = "",

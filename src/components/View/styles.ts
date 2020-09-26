@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import viewIcon from "assets/icons/viewIcon.svg";
-import { Label } from "ui/Form";
+import { Label } from "ui/form";
 
 const ViewWrapper = styled.div``;
 
