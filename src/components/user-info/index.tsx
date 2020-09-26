@@ -1,9 +1,9 @@
 import React from "react";
-import ArrowUpIcon from "ui/icons/arrow-up";
+import { ArrowUpIcon } from "ui/icons/arrow-up";
 
 import { UserWrapper, UserName, UserAvatar, UserMenu } from "./styles";
 
-const UserLK = () => {
+export const UserInfo = () => {
   return (
     <UserWrapper>
       <UserName>Severstal\av.baruzdin</UserName>
@@ -14,5 +14,3 @@ const UserLK = () => {
     </UserWrapper>
   );
 };
-
-export default UserLK;

@@ -1,4 +1,7 @@
+import React from "react";
+import UserLK from "components/user-info";
 import styled from "styled-components";
+import logo from "assets/images/logo.svg";
 
 const HeaderWrapper = styled.header`
   display: flex;
@@ -11,4 +14,11 @@ const HeaderWrapper = styled.header`
 
 const Logo = styled.img``;
 
-export { HeaderWrapper, Logo };
+export const Header = () => {
+  return (
+    <HeaderWrapper>
+      <Logo src={logo} />
+      <UserLK />
+    </HeaderWrapper>
+  );
+};

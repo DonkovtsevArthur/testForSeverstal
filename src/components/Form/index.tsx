@@ -1,32 +1,36 @@
-import React, { memo } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-
 import Input from "ui/form/input";
-import InputFile from "ui/form/input-file";
-import Textarea from "ui/form/textarea";
-import View from "components/View";
-
-import { FormBtn, FormItem, FormWrapper } from "./styles";
-
+import View from "components/view";
 import axios from "axios";
-
 import test from "assets/images/512.png";
-
 import { clearTitlePush, setTitlePush } from "store/titlePush/actions";
 import { getTitlePush } from "store/titlePush/selectors";
 import { getDescPush } from "store/descPush/selectors";
 import { clearDescPush, setDescPush } from "store/descPush/actions";
 import { getImagePush } from "store/imagePush/selectors";
-import {
-
-  clearImagePush,
-
-  setUrlImagePush,
-  setViewImagePush,
-} from "store/imagePush/actions";
+import { clearImagePush, setUrlImagePush, setViewImagePush } from "store/imagePush/actions";
 import { getImageFileReader, getParamsImage } from "./helpers";
+import styled from "styled-components";
+import { Button } from "ui/button";
+import { InputFile } from "ui/form/input-file";
+import { Textarea } from "ui/form/textarea";
 
-const Form = () => {
+const FormWrapper = styled.form``;
+
+const FormItem = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  width: 685px;
+  margin-bottom: 22px;
+`;
+const FormBtn = styled(Button)`
+  margin-left: 79px;
+  margin-bottom: 5px;
+`;
+
+export const Form = () => {
   const dispatchRedux = useDispatch();
 
   const title = useSelector(getTitlePush);
@@ -110,5 +114,3 @@ const Form = () => {
     </FormWrapper>
   );
 };
-
-export default memo(Form);

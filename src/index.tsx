@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 import { store } from "store";
 import { ThemeProvider } from "styled-components";
 import { theme } from "theme";
-import { GlobalStyles } from "theme/GlobalStyles";
+import { GlobalStyles } from "theme/global-styles";
 
 import * as serviceWorker from "./serviceWorker";
 

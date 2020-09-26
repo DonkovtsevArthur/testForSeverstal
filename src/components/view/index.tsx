@@ -11,7 +11,7 @@ type ViewType = {
 const titleDefault = "Укажите текст заголовка";
 const textDefault = "Ведите текст уведомления";
 
-const View: React.FC<ViewType> = ({ title = "", text = "", imgUrl = "" }) => {
+export const View: React.FC<ViewType> = memo(({ title = "", text = "", imgUrl = "" }) => {
   return (
     <ViewWrapper>
       <ViewLabel>Предпростмотр</ViewLabel>
@@ -26,6 +26,4 @@ const View: React.FC<ViewType> = ({ title = "", text = "", imgUrl = "" }) => {
       </ViewBoxWrapper>
     </ViewWrapper>
   );
-};
-
-export default memo(View);
+});

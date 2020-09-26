@@ -1,8 +1,12 @@
-import GlobalAds from "components/GlobalAds";
+import { GlobalAds } from "components/global-ads";
 import React, { useMemo } from "react";
 import { TabPanel } from "react-tabs";
+import styled from "styled-components";
 import { Tab, TabList, Tabs } from "ui/tabs";
-import { TabListWrapper } from "./styles";
+
+const TabListWrapper = styled.div`
+  padding: 43px 50px;
+`;
 
 const tabs = [
   { title: "Глобальные объявления", Component: () => <GlobalAds /> },
@@ -10,7 +14,7 @@ const tabs = [
   { title: "Контент-уведомления", Component: () => <h2>Контент-уведомления</h2> },
 ];
 
-const Push = () => {
+export const Push = () => {
   const renderTabs = useMemo(() => tabs.map(({ title }) => <Tab key={title}>{title}</Tab>), []);
   const renderTabPanels = useMemo(
     () =>
@@ -30,5 +34,3 @@ const Push = () => {
     </Tabs>
   );
 };
-
-export default Push;

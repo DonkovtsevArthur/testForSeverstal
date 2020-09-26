@@ -1,7 +1,7 @@
 import React from "react";
-import Layout from "./components/Layout/Layout";
+import Layout from "./components/layout";
 import { Route, Switch } from "react-router-dom";
-import { sidebar } from "components/SideBar/SideBar";
+import { sidebar } from "components/sidebar";
 
 export function App() {
   return (
