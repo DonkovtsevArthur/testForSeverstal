@@ -29,6 +29,7 @@ export const GlobalStyles = createGlobalStyle`
 
   input, 
   textarea {
+    position: relative;
     font-style: normal;
     font-weight: normal;
     font-size: 18px;
@@ -37,7 +38,7 @@ export const GlobalStyles = createGlobalStyle`
     border: 1px solid ${({ theme }) => theme.colors.blueDark};
     box-sizing: border-box;
     border-radius: 5px;
-    padding: 18px 20px 20px;
+    padding: 18px 55px 20px 20px;
     width: 100%;
     transition: border-color 0.25s ease;
 

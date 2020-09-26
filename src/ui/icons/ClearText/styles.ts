@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-const ClearTextWrapper = styled.div`
+const ClearTextWrapper = styled.div<{ isError?: boolean }>`
   svg {
     cursor: pointer;
     border-radius: 5px;
@@ -36,6 +36,17 @@ const ClearTextWrapper = styled.div`
         stroke: ${({ theme }) => theme.colors.blueGrey};
       }
     }
+
+    ${({ isError }) => {
+      return (
+        isError &&
+        css`
+          path {
+            stroke: ${({ theme }) => theme.colors.blueGrey};
+          }
+        `
+      );
+    }}
   }
 `;
 

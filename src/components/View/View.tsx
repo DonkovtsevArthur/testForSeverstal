@@ -5,18 +5,22 @@ import { ViewBox, ViewBoxWrapper, ViewContent, ViewImg, ViewLabel, ViewText, Vie
 type ViewType = {
   title?: string;
   text?: string;
+  imgUrl?: any;
 };
 
-const View: React.FC<ViewType> = ({ title = "Укажите текст заголовка", text = "Ведите текст уведомления" }) => {
+const titleDefault = "Укажите текст заголовка";
+const textDefault = "Ведите текст уведомления";
+
+const View: React.FC<ViewType> = ({ title = "", text = "", imgUrl = "" }) => {
   return (
     <ViewWrapper>
       <ViewLabel>Предпростмотр</ViewLabel>
       <ViewBoxWrapper>
         <ViewBox>
-          <ViewImg />
+          <ViewImg imgUrl={imgUrl} />
           <ViewContent>
-            <ViewTitle>{title}</ViewTitle>
-            <ViewText>{text}</ViewText>
+            <ViewTitle>{title || titleDefault}</ViewTitle>
+            <ViewText>{text || textDefault}</ViewText>
           </ViewContent>
         </ViewBox>
       </ViewBoxWrapper>

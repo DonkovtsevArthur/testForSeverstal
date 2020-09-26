@@ -7,16 +7,24 @@ type TextareaType = {
   label?: string;
   value?: string;
   placeholder?: string;
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  onClear?: () => void;
 };
 
-const Textarea: React.FC<TextareaType> = ({ label = "", value = "", placeholder = "" }) => {
+const Textarea: React.FC<TextareaType> = ({
+  label = "",
+  value = "",
+  placeholder = "",
+  onChange = () => {},
+  onClear = () => {},
+}) => {
   return (
     <FormWrapperElement>
       {label && <Label>{label}</Label>}
 
       <FormValueWrapper>
-        <TextareaValue value={value} placeholder={placeholder} />
-        <ClearIcon>
+        <TextareaValue value={value} placeholder={placeholder} onChange={onChange} />
+        <ClearIcon onClick={onClear}>
           <ClearText />
         </ClearIcon>
       </FormValueWrapper>

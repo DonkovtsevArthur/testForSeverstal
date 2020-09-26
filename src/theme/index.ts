@@ -20,6 +20,8 @@ type Theme = {
     blueSuperDark: string;
     blueGrey: string;
     blueDisabledText: string;
+
+    red: string;
   };
   fonts: {
     RobotoItalic: "Roboto Italic";
@@ -54,6 +56,8 @@ export const theme: Theme = {
     blueSuperDark: "#3564D3",
     blueGrey: "#E0E7F8",
     blueDisabledText: "#BFCBE9",
+
+    red: "#DD1E25",
   },
   fonts: { RobotoItalic: "Roboto Italic", RobotoRegular: "Roboto Regular", RobotoMedium: "Roboto Medium" },
 };
