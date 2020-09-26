@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import OverviewIcon from "ui/icons/OverviewIcon";
 
 import { Label } from "..";
@@ -25,4 +25,4 @@ const InputFile: React.FC<InputFileType> = ({ label = "", onChange = () => {} })
   );
 };
 
-export default InputFile;
+export default memo(InputFile);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import ClearText from "ui/icons/ClearText";
 import { FormValueWrapper, FormWrapperElement, InputValue, Label } from "..";
 import { ClearIcon } from "./styles";
@@ -18,12 +18,10 @@ const Input: React.FC<Input> = ({
   value = "",
   placeholder = "",
   textError = "Ошибка",
-
   isError,
   onChange = () => {},
   onClear = () => {},
 }) => {
-  console.log("textError", textError);
   return (
     <FormWrapperElement>
       {label && <Label>{label}</Label>}
@@ -39,4 +37,4 @@ const Input: React.FC<Input> = ({
   );
 };
 
-export default Input;
+export default memo(Input);

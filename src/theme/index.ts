@@ -20,6 +20,7 @@ type Theme = {
     blueSuperDark: string;
     blueGrey: string;
     blueDisabledText: string;
+    blueLilac: string;
 
     red: string;
   };
@@ -56,6 +57,7 @@ export const theme: Theme = {
     blueSuperDark: "#3564D3",
     blueGrey: "#E0E7F8",
     blueDisabledText: "#BFCBE9",
+    blueLilac: "#7E8DB6",
 
     red: "#DD1E25",
   },

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import ClearText from "ui/icons/ClearText";
 import { FormValueWrapper, FormWrapperElement } from "..";
 import { ClearIcon, TextareaValue, Label } from "./styles";
@@ -32,4 +32,4 @@ const Textarea: React.FC<TextareaType> = ({
   );
 };
 
-export default Textarea;
+export default memo(Textarea);

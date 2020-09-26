@@ -27,7 +27,39 @@ const InputValueFile = styled(InputValue)`
     background-color: ${({ theme }) => theme.colors.blueLight};
     border-radius: 5px;
     margin-bottom: 0;
-    padding: 0 31px;
+    padding: 0 30px;
+    border: 1px solid transparent;
+    transition: border-color 0.25s ease, color 0.55s ease, background-color 0.55s ease;
+  }
+
+  &:focus {
+    + label {
+      border-color: ${({ theme }) => theme.colors.blueStroke};
+    }
+  }
+
+  &:hover {
+    + label {
+      background-color: ${({ theme }) => theme.colors.blueLilac};
+    }
+  }
+
+  &:active {
+    + label {
+      background-color: ${({ theme }) => theme.colors.blueDarkLight};
+    }
+  }
+
+  &:disabled {
+    + label {
+      color: ${({ theme }) => theme.colors.blueDisabledText};
+      background-color: ${({ theme }) => theme.colors.blueGrey};
+      svg {
+        path {
+          fill: ${({ theme }) => theme.colors.blueDisabledText};
+        }
+      }
+    }
   }
 `;
 
