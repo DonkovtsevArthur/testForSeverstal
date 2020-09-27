@@ -27,6 +27,10 @@ export const GlobalStyles = createGlobalStyle`
     outline: none;
   }
 
+  input {
+    height: 55px
+  }
+  
   input, 
   textarea {
     position: relative;
@@ -38,7 +42,7 @@ export const GlobalStyles = createGlobalStyle`
     border: 1px solid ${({ theme }) => theme.colors.blueDark};
     box-sizing: border-box;
     border-radius: 5px;
-    padding: 18px 55px 20px 20px;
+    padding: 18px 55px 20px 18px;
     width: 100%;
     transition: border-color 0.25s ease;
 
