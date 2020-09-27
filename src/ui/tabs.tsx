@@ -1,19 +1,15 @@
-import { Tabs as TabsDefault, TabList as TabListDefault, Tab as TabDefault } from "react-tabs";
+import { TabList as TabListDefault, Tab as TabDefault } from "react-tabs";
+
 import styled from "styled-components";
 
-const Tabs = styled(TabsDefault)`
-  width: 100%;
-  background-color: ${({ theme }) => theme.colors.blueWhite};
-`;
-
-const TabList = styled(TabListDefault)`
+export const TabList = styled(TabListDefault)`
   display: flex;
   padding: 25px;
   padding-left: 50px;
   border-bottom: 3px solid ${({ theme }) => theme.colors.blueSuperLight};
 `;
 
-const Tab = styled(TabDefault)`
+export const Tab = styled(TabDefault)`
   cursor: pointer;
   list-style: none;
   font-size: 18px;
@@ -41,4 +37,4 @@ const Tab = styled(TabDefault)`
   }
 `;
 
-export { Tabs, Tab, TabList };
+export { Tabs } from "react-tabs";
