@@ -65,7 +65,7 @@ type Props = {
 
 export const ClearIconButton: React.FC<Props> = ({ onClick = () => {}, isError }) => {
   return (
-    <Button onClick={onClick} isError={isError} onMouseLeave={cancelBlurElement}>
+    <Button onClick={onClick} type="reset" isError={isError} onMouseLeave={cancelBlurElement}>
       <ClearIcon />
     </Button>
   );

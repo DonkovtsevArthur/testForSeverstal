@@ -1,10 +1,6 @@
-import { Tabs as TabsDefault, TabList as TabListDefault, Tab as TabDefault } from "react-tabs";
-import styled from "styled-components";
+import { TabList as TabListDefault, Tab as TabDefault } from "react-tabs";
 
-export const Tabs = styled(TabsDefault)`
-  width: 100%;
-  background-color: ${({ theme }) => theme.colors.blueWhite};
-`;
+import styled from "styled-components";
 
 export const TabList = styled(TabListDefault)`
   display: flex;
@@ -40,3 +36,5 @@ export const Tab = styled(TabDefault)`
     }
   }
 `;
+
+export { Tabs } from "react-tabs";

@@ -9,7 +9,6 @@ import { UploadImageControl } from "../components/upload-image-control";
 import { clearImage, fetchImage, setError, setFileToView, setUrl, uploadImageSelector } from "../store";
 import { ClearIconButton } from "ui/clear-icon-button";
 import { InfoForUploadImage } from "ui/info-for-upload-image";
-import text from "assets/images/512.png";
 import { Preloader } from "ui/preloader";
 import { getErrorFormSelector } from "features/form/store";
 
@@ -74,7 +73,6 @@ export const UploadImage = () => {
         </UploadImageFileStyled>
       </UploadImageStyled>
       <InfoForUploadImage />
-      <img src={text} alt="" />
     </FormControlWrapper>
   );
 };
