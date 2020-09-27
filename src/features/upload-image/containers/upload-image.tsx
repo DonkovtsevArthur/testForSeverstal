@@ -31,7 +31,7 @@ export const UploadImage = () => {
 
     dispatch(setUrlImage({ url: value, isError, textError }));
 
-    if (!isError && value) {
+    if (value) {
       dispatch(setViewFromUrl(value));
     }
   };

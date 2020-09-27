@@ -1,4 +1,4 @@
-import { AnyAction, Dispatch, Store } from "redux";
+import { AnyAction, Dispatch } from "redux";
 import axios from "axios";
 import { getImageFileReader, getParamsImage } from "./helpers";
 
@@ -96,7 +96,7 @@ type SetViewImage = {
 export const setViewImage = ({ view, width, height, alpha }: SetViewImage) => (dispatch: Dispatch) => {
   const isSize = width === 512 && height === 512;
   const is32Bit = alpha === 1;
-  let errors = [];
+  const errors = [];
 
   if (!isSize) {
     errors.push(`размер ${width}x${height}px`);
@@ -104,6 +104,7 @@ export const setViewImage = ({ view, width, height, alpha }: SetViewImage) => (d
   if (!is32Bit) {
     errors.push("не 32 разрядная PNG");
   }
+
   if (errors.length) {
     dispatch(setErrorsImage(errors));
   }
@@ -122,11 +123,18 @@ const getBase64ImageFromFile = ({ data, dispatch }: { data: File; dispatch: Disp
 };
 
 export const setViewFromUrl = (value: string) => async (dispatch: Dispatch) => {
-  const { data } = await axios.get(value, { responseType: "blob" });
-  getBase64ImageFromFile({ data, dispatch });
+  try {
+    const { data, status } = await axios.get(value, { responseType: "blob" });
+
+    if (status === 200) {
+      getBase64ImageFromFile({ data, dispatch });
+    }
+  } catch (error) {
+    console.error("setViewFromUrl -> error", error);
+  }
 };
 
-export const setViewFromFile = (data: File) => async (dispatch: Dispatch) => {
+export const setViewFromFile = (data: File) => (dispatch: Dispatch) => {
   getBase64ImageFromFile({ data, dispatch });
 };
 
