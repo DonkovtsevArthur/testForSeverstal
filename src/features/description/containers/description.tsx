@@ -1,4 +1,5 @@
-import React from "react";
+import { getErrorFormSelector } from "features/form/store";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import { FormControlWrapper, Label, Wrapper } from "ui";
@@ -9,7 +10,14 @@ import { store } from "../store";
 
 export const Description = () => {
   const dispatch = useDispatch();
-  const { text } = useSelector(store.selector);
+
+  const { value, error } = useSelector(store.selector);
+  const errorFromForm = useSelector(getErrorFormSelector);
+  useEffect(() => {
+    if (!value && errorFromForm) {
+      dispatch(store.setError("Пустое поле"));
+    }
+  }, [errorFromForm, value, dispatch]);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     dispatch(store.changeText(e.target.value));
@@ -18,12 +26,13 @@ export const Description = () => {
   return (
     <FormControlWrapper>
       <Label>Текст уведомления</Label>
-      <Wrapper>
+      <Wrapper textError={error}>
         <FormControl
           as="textarea"
           rows={3}
+          textError={error}
           style={{ resize: "none" }}
-          value={text}
+          value={value}
           placeholder="Введите текст уведомления"
           onChange={handleChange}
         />

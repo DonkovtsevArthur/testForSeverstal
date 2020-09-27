@@ -4,6 +4,12 @@ import viewIcon from "assets/icons/viewIcon.svg";
 import { Label } from "ui";
 import { H3 } from "./typography";
 import { useSelector } from "react-redux";
+import { getStateDefault } from "store/library";
+
+const PreviewStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const LabelStyled = styled(Label)`
   display: block;
@@ -62,29 +68,23 @@ const Text = styled.p`
   word-break: break-word;
 `;
 
-const getState = (state: any) => {
-  return {
-    title: state.title.text || undefined,
-    description: state.description.text || undefined,
-    url: state.uploadImage.view,
-  };
-};
-
 export const Preview = () => {
-  const { title = "Укажите текст заголовка", description = "Ведите текст уведомления", url } = useSelector(getState);
+  const { title = "Укажите текст заголовка", description = "Ведите текст уведомления", uploadImage } = useSelector(
+    getStateDefault(["title", "description", "uploadImage"]),
+  );
 
   return (
-    <>
+    <PreviewStyled>
       <LabelStyled>Предпростмотр</LabelStyled>
       <BoxWrapper>
         <Box>
-          <Image imgUrl={url} />
+          <Image imgUrl={uploadImage} />
           <Content>
             <H3>{title}</H3>
             <Text>{description}</Text>
           </Content>
         </Box>
       </BoxWrapper>
-    </>
+    </PreviewStyled>
   );
 };

@@ -1,11 +1,12 @@
+import { cancelBlurElement } from "library/cancel-blur-element";
 import { Analyst } from "pages/analyst";
 import { Push } from "pages/push";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-import { AnalystIcon } from "./icons/analyst";
-import { PushIcon } from "./icons/push";
+import { AnalystIcon } from "../../../ui/icons/analyst";
+import { PushIcon } from "../../../ui/icons/push";
 
 const SideBarStyled = styled.nav`
   display: flex;
@@ -80,12 +81,7 @@ export const SideBar = () => {
   return (
     <SideBarStyled>
       {sidebar.map(({ title, Icon, code }) => (
-        <LinkStyled
-          to={`/${code}`}
-          key={title}
-          isActive={getIsActive(code)}
-          onMouseLeave={(e) => e.currentTarget.blur()}
-        >
+        <LinkStyled to={`/${code}`} key={title} isActive={getIsActive(code)} onMouseLeave={cancelBlurElement}>
           <Icon />
           {title}
         </LinkStyled>

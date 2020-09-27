@@ -1,4 +1,5 @@
-import React from "react";
+import { getErrorFormSelector } from "features/form/store";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { FormControlWrapper, Label, Wrapper } from "ui";
 import { ClearIconButton } from "ui/clear-icon-button";
@@ -8,8 +9,13 @@ import { store } from "../store";
 
 export const Title = () => {
   const dispatch = useDispatch();
-  const { text } = useSelector(store.selector);
-  console.log("Title -> text", text);
+  const { value, error } = useSelector(store.selector);
+  const errorFromForm = useSelector(getErrorFormSelector);
+  useEffect(() => {
+    if (!value && errorFromForm) {
+      dispatch(store.setError("Пустое поле"));
+    }
+  }, [errorFromForm, value, dispatch]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(store.changeText(e.target.value));
@@ -18,8 +24,8 @@ export const Title = () => {
   return (
     <FormControlWrapper>
       <Label>Название уведомления</Label>
-      <Wrapper>
-        <FormControl value={text} placeholder="Введите текст уведомления" onChange={handleChange} />
+      <Wrapper textError={error}>
+        <FormControl textError={error} value={value} placeholder="Введите текст уведомления" onChange={handleChange} />
         <ClearIconButton onClick={() => dispatch(store.clearText())} />
       </Wrapper>
     </FormControlWrapper>

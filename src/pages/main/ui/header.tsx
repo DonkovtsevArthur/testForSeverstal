@@ -2,7 +2,7 @@ import React from "react";
 import logo from "assets/images/logo.svg";
 
 import styled from "styled-components";
-import { UserInfo } from "./user-info";
+import { UserInfo } from "../../../ui/user-info";
 
 const HeaderStyled = styled.header`
   display: flex;

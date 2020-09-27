@@ -1,13 +1,17 @@
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { FormControlWrapper, FormWrapper, Label, Wrapper } from "ui";
 import { FormControl } from "ui/form-control";
 import { OverviewIcon } from "ui/icons/overview";
 import { UploadImageControl } from "../components/upload-image-control";
-import { clearImage, setUrlImage, setViewFromFile, setViewFromUrl, uploadImageSelector } from "../store";
+import { clearImage, fetchImage, setError, setFileToView, setUrl, uploadImageSelector } from "../store";
 import { ClearIconButton } from "ui/clear-icon-button";
 import { InfoForUploadImage } from "ui/info-for-upload-image";
+import text from "assets/images/512.png";
+import { Preloader } from "ui/preloader";
+import { getErrorFormSelector } from "features/form/store";
 
 const UploadImageFileStyled = styled(FormWrapper)`
   position: relative;
@@ -19,34 +23,46 @@ const UploadImageStyled = styled.div`
   flex-direction: row;
 `;
 
-const regex = /(http(s?):)([/|.|\w|\s|-])*\.(?:png)/gi;
-
 export const UploadImage = () => {
   const dispatch = useDispatch();
-  const { url, textError, isError } = useSelector(uploadImageSelector);
+  const { url, error, loading, value } = useSelector(uploadImageSelector);
+  const errorFromForm = useSelector(getErrorFormSelector);
 
-  const handleChange = async ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
-    const isError = !regex.test(value);
-    const textError = isError && value ? "Не верно указана ссылка" : "";
+  useEffect(() => {
+    if (!value && errorFromForm) {
+      dispatch(setError("Пустое поле"));
+    }
+  }, [errorFromForm, value, dispatch]);
 
-    dispatch(setUrlImage({ url: value, isError, textError }));
+  useEffect(() => {
+    if (url && !error.length) {
+      dispatch(fetchImage(url));
+    }
+  }, [url]);
 
-    if (value) {
-      dispatch(setViewFromUrl(value));
+  const handleChange = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setUrl(value));
+  };
+
+  const handleChangeFile = ({ target: { files } }: React.ChangeEvent<HTMLInputElement>) => {
+    if (files) {
+      dispatch(setFileToView(files));
     }
   };
 
-  const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const [file] = e.target.files as FileList;
-    dispatch(setViewFromFile(file));
-  };
-
+  const textError = error.join(", ");
   return (
     <FormControlWrapper>
-      <Label>Прикрепить изображение</Label>
+      <Label>Прикрепить изображение {loading && <Preloader />}</Label>
+
       <UploadImageStyled>
-        <Wrapper style={{ width: "100%" }} isError={isError} textError={textError.join(", ")}>
-          <FormControl value={url} placeholder="Укажите прямую ссылку на изображение" onChange={handleChange} />
+        <Wrapper style={{ width: "100%" }} textError={textError}>
+          <FormControl
+            textError={textError}
+            value={url}
+            placeholder="Укажите прямую ссылку на изображение"
+            onChange={handleChange}
+          />
           <ClearIconButton onClick={() => dispatch(clearImage())} />
         </Wrapper>
         <UploadImageFileStyled>
@@ -58,6 +74,7 @@ export const UploadImage = () => {
         </UploadImageFileStyled>
       </UploadImageStyled>
       <InfoForUploadImage />
+      <img src={text} alt="" />
     </FormControlWrapper>
   );
 };

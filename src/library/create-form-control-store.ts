@@ -7,11 +7,11 @@ type Options = {
 export const createFormControlStore = (options: Options) => {
   const CHANGED = `${options.name}/CHANGED`;
   const CLEARED = `${options.name}/CLEARED`;
+  const SET_ERROR = `${options.name}/SET_ERROR`;
 
   const initialState = {
-    text: "",
-    isError: false,
-    textError: "",
+    value: "",
+    error: "",
   };
 
   const reducer = (state = initialState, { type, payload }: AnyAction) => {
@@ -19,7 +19,14 @@ export const createFormControlStore = (options: Options) => {
       case CHANGED:
         return {
           ...state,
-          text: payload,
+          value: payload,
+          error: "",
+        };
+
+      case SET_ERROR:
+        return {
+          ...state,
+          error: payload,
         };
       case CLEARED:
         return initialState;
@@ -28,16 +35,21 @@ export const createFormControlStore = (options: Options) => {
     }
   };
 
-  const changeText = (text: string) => ({
+  const changeText = (payload: string) => ({
     type: CHANGED,
-    payload: text,
+    payload,
   });
 
   const clearText = () => ({
     type: CLEARED,
   });
 
+  const setError = (payload: string) => ({
+    type: SET_ERROR,
+    payload,
+  });
+
   const selector = (state: any) => state[options.name];
 
-  return { reducer, changeText, clearText, selector };
+  return { reducer, changeText, clearText, selector, setError };
 };

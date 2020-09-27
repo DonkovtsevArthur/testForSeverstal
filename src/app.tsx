@@ -5,8 +5,8 @@ import { ThemeProvider } from "styled-components";
 import { theme } from "theme";
 import { GlobalStyles } from "theme/global-styles";
 import { store } from "store";
-import { Layout } from "ui/layout";
-import { sidebar } from "ui/sidebar";
+import { Layout } from "pages/main/ui/layout";
+import { sidebar } from "pages/main/ui/sidebar";
 
 export function App() {
   return (

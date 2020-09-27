@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 
 export const Label = styled.label`
+  display: flex;
   color: ${({ theme }) => theme.colors.lavender};
   margin-bottom: 10px;
   font-weight: normal;
@@ -12,11 +13,11 @@ export const FormWrapper = styled.div`
   width: 100%;
 `;
 
-export const Wrapper = styled.div<{ isError?: boolean; textError?: string }>`
+export const Wrapper = styled.div<{ textError?: string }>`
   position: relative;
-  ${({ isError, textError = "" }) => {
+  ${({ textError = "" }) => {
     return (
-      isError &&
+      textError &&
       css`
         &::after {
           content: ${() => `"${textError ? textError : ""}"`};
@@ -30,17 +31,16 @@ export const Wrapper = styled.div<{ isError?: boolean; textError?: string }>`
   }}
 `;
 
-export const FormControlWrapper = styled.div<{ isError?: boolean; textError?: string }>`
+export const FormControlWrapper = styled.div<{ textError?: string }>`
   position: relative;
   display: flex;
   flex-direction: column;
   width: 685px;
   margin-bottom: 22px;
 
-  ${({ isError, textError = "" }) => {
-    console.log("textError", textError);
+  ${({ textError = "" }) => {
     return (
-      isError &&
+      textError &&
       css`
         &::after {
           content: ${() => `"${textError ? textError : ""}"`};

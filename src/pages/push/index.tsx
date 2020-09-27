@@ -1,7 +1,7 @@
 import React from "react";
 import { TabPanel } from "react-tabs";
 import styled from "styled-components";
-import { GlobalAds } from "ui/global-ads";
+import { GlobalAds } from "pages/main/ui/global-ads";
 import { Tab, TabList, Tabs } from "ui/tabs";
 
 const TabListWrapper = styled.div`

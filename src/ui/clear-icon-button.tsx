@@ -1,3 +1,4 @@
+import { cancelBlurElement } from "library/cancel-blur-element";
 import React from "react";
 import styled, { css } from "styled-components";
 import { ClearIcon } from "./icons/clear";
@@ -64,7 +65,7 @@ type Props = {
 
 export const ClearIconButton: React.FC<Props> = ({ onClick = () => {}, isError }) => {
   return (
-    <Button onClick={onClick} isError={isError} onMouseLeave={(e) => e.currentTarget.blur()}>
+    <Button onClick={onClick} isError={isError} onMouseLeave={cancelBlurElement}>
       <ClearIcon />
     </Button>
   );

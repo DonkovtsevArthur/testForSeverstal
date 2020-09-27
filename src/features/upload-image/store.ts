@@ -1,58 +1,56 @@
 import { AnyAction, Dispatch } from "redux";
 import axios from "axios";
-import { getImageFileReader, getParamsImage } from "./helpers";
+import { checkIsImage, getImageFileReader, getParamsImage } from "./library";
 
-const VIEW_IMAGE_SETTLED = "uploadImage/VIEW_IMAGE_SETTLED";
 const URL_IMAGE_SETTLED = "uploadImage/URL_IMAGE_SETTLED";
 const ERROR_IMAGE_SETTLED = "uploadImage/ERROR_IMAGE_SETTLED";
-const ERRORS_IMAGE_SETTLED = "uploadImage/ERRORS_IMAGE_SETTLED";
+
 const IMAGE_CLEARED = "uploadImage/IMAGE_CLEARED";
 const ERROR_IMAGE_CLEARED = "uploadImage/ERROR_IMAGE_CLEARED";
 
+const FETCH_IMAGE_REQUESTED = "uploadImage/FETCH_IMAGE_REQUESTED";
+const FETCH_IMAGE_FAILURED = "uploadImage/FETCH_IMAGE_FAILURED";
+const FETCH_IMAGE_SUCCEEDED = "uploadImage/FETCH_IMAGE_SUCCEEDED";
+
 const initialState = {
   url: "",
-  view: undefined,
-  isError: false,
-  textError: [],
+  value: undefined,
+  loading: false,
+  error: [],
 };
 
 export const uploadImage = (state = initialState, { type, payload }: AnyAction) => {
   switch (type) {
-    case VIEW_IMAGE_SETTLED:
-      return {
-        ...state,
-        view: payload,
-        isError: false,
-        textError: [],
-      };
-
     case URL_IMAGE_SETTLED:
       return {
         ...state,
-        url: payload.url,
-        isError: payload.isError,
-        textError: [payload.textError],
+        url: payload,
+        error: !checkIsImage(payload) && payload ? ["Не верно указана ссылка"] : [],
       };
+
+    case FETCH_IMAGE_REQUESTED:
+      return {
+        ...state,
+        loading: true,
+        error: [],
+      };
+
+    case FETCH_IMAGE_SUCCEEDED:
+      return { ...state, loading: false, value: payload, error: [] };
+
+    case FETCH_IMAGE_FAILURED:
+      return { ...state, loading: false, error: [...state.error, payload] };
 
     case ERROR_IMAGE_SETTLED:
       return {
         ...state,
-        isError: true,
-        textError: [payload],
-      };
-
-    case ERRORS_IMAGE_SETTLED:
-      return {
-        ...state,
-        isError: true,
-        textError: payload,
+        error: [payload],
       };
 
     case ERROR_IMAGE_CLEARED:
       return {
         ...state,
-        isError: false,
-        textError: [],
+        error: [],
       };
 
     case IMAGE_CLEARED:
@@ -63,79 +61,65 @@ export const uploadImage = (state = initialState, { type, payload }: AnyAction) 
   }
 };
 
-export const setUrlImage = ({ textError, url, isError }: { textError?: string; url?: string; isError?: boolean }) => ({
+export const setUrl = (payload: string) => ({
   type: URL_IMAGE_SETTLED,
-  payload: { textError, url, isError },
-});
-
-export const setErrorImage = (text: string) => ({
-  type: ERROR_IMAGE_SETTLED,
-  payload: text,
-});
-
-export const setErrorsImage = (text: string[]) => ({
-  type: ERRORS_IMAGE_SETTLED,
-  payload: text,
+  payload,
 });
 
 export const clearImage = () => ({
   type: IMAGE_CLEARED,
 });
 
-export const clearErrorImage = () => ({
+export const clearError = () => ({
   type: ERROR_IMAGE_CLEARED,
 });
 
-type SetViewImage = {
-  view: string;
-  width: number;
-  height: number;
-  alpha: 1 | 0;
-};
+const setLoading = () => ({
+  type: FETCH_IMAGE_REQUESTED,
+});
 
-export const setViewImage = ({ view, width, height, alpha }: SetViewImage) => (dispatch: Dispatch) => {
-  const isSize = width === 512 && height === 512;
-  const is32Bit = alpha === 1;
-  const errors = [];
+const setData = (payload: string) => ({
+  type: FETCH_IMAGE_SUCCEEDED,
+  payload,
+});
 
-  if (!isSize) {
-    errors.push(`размер ${width}x${height}px`);
-  }
-  if (!is32Bit) {
-    errors.push("не 32 разрядная PNG");
-  }
+export const setError = (payload: string) => ({
+  type: FETCH_IMAGE_FAILURED,
+  payload,
+});
 
-  if (errors.length) {
-    dispatch(setErrorsImage(errors));
-  }
-
-  if (view && isSize && is32Bit) {
-    dispatch({ type: VIEW_IMAGE_SETTLED, payload: view });
-  }
-};
-
-const getBase64ImageFromFile = ({ data, dispatch }: { data: File; dispatch: Dispatch }) => {
-  getImageFileReader(data, async (upload) => {
+export const setFileToView = ([file]: FileList) => (dispatch: Dispatch) => {
+  getImageFileReader(file, async (upload) => {
     const { result, alpha, width, height } = await getParamsImage(upload);
-    // @ts-ignore
-    dispatch(setViewImage({ view: result, width, height, alpha }));
+    const isSize = width === 512 && height === 512;
+    const is32Bit = alpha === 1;
+
+    if (!isSize) {
+      dispatch(setError(`размер ${width}x${height}px`));
+    }
+
+    if (!is32Bit) {
+      dispatch(setError("не 32 разрядная PNG"));
+    }
+
+    if (result && isSize && is32Bit) {
+      dispatch(setData(result));
+    }
   });
 };
 
-export const setViewFromUrl = (value: string) => async (dispatch: Dispatch) => {
+export const fetchImage = (value: string) => async (dispatch: Dispatch) => {
+  dispatch(setLoading());
   try {
     const { data, status } = await axios.get(value, { responseType: "blob" });
 
     if (status === 200) {
-      getBase64ImageFromFile({ data, dispatch });
+      // @ts-ignore
+      dispatch(setFileToView([data]));
     }
   } catch (error) {
-    console.error("setViewFromUrl -> error", error);
+    dispatch(setError(error));
   }
-};
-
-export const setViewFromFile = (data: File) => (dispatch: Dispatch) => {
-  getBase64ImageFromFile({ data, dispatch });
 };
 
 export const uploadImageSelector = (state: any) => state.uploadImage;

@@ -27,7 +27,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "docker-build": "docker build -t severstal-test .",
+    "docker-run": "npm run docker-build && docker run -p 3030:3000 -t severstal-test"
   },
   "eslintConfig": {
     "extends": "react-app"

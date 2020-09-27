@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
 
-export const FormControl = styled.input<{ isError?: boolean }>`
-  ${({ isError }) => {
+export const FormControl = styled.input<{ textError?: string }>`
+  ${({ textError = "" }) => {
     return (
-      isError &&
+      textError &&
       css`
         border-color: ${({ theme }) => theme.colors.red};
 
