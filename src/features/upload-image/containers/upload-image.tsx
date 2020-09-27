@@ -5,9 +5,7 @@ import { FormControlWrapper, FormWrapper, Label, Wrapper } from "ui";
 import { FormControl } from "ui/form-control";
 import { OverviewIcon } from "ui/icons/overview";
 import { UploadImageControl } from "../components/upload-image-control";
-import { clearImage, setUrlImage, setViewImage, uploadImageSelector } from "../store";
-import { getImageFileReader, getParamsImage } from "./helpers";
-import axios from "axios";
+import { clearImage, setUrlImage, setViewFromFile, setViewFromUrl, uploadImageSelector } from "../store";
 import { ClearIconButton } from "ui/clear-icon-button";
 import { InfoForUploadImage } from "ui/info-for-upload-image";
 
@@ -21,35 +19,26 @@ const UploadImageStyled = styled.div`
   flex-direction: row;
 `;
 
+const regex = /(http(s?):)([/|.|\w|\s|-])*\.(?:png)/gi;
+
 export const UploadImage = () => {
   const dispatch = useDispatch();
   const { url, textError, isError } = useSelector(uploadImageSelector);
-  console.log("UploadImage -> textError", textError);
 
-  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    const regex = /(http(s?):)([/|.|\w|\s|-])*\.(?:png)/g;
+  const handleChange = async ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
     const isError = !regex.test(value);
-    const textError = isError ? "Не верно указана ссылка" : "";
+    const textError = isError && value ? "Не верно указана ссылка" : "";
 
     dispatch(setUrlImage({ url: value, isError, textError }));
 
     if (!isError && value) {
-      const { data } = await axios.get(value, { responseType: "blob" });
-      getImageFileReader(data, async (upload) => {
-        const { result, alpha, width, height } = await getParamsImage(upload);
-        dispatch(setViewImage({ view: result, width, height, alpha, error: [textError] }));
-      });
+      dispatch(setViewFromUrl(value));
     }
   };
 
   const handleChangeFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const [file] = e.target.files as FileList;
-
-    getImageFileReader(file, async (upload) => {
-      const { result, alpha, width, height } = await getParamsImage(upload);
-      dispatch(setViewImage({ view: result, width, height, alpha, error: textError }));
-    });
+    dispatch(setViewFromFile(file));
   };
 
   return (

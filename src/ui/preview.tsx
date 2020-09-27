@@ -3,6 +3,7 @@ import styled from "styled-components";
 import viewIcon from "assets/icons/viewIcon.svg";
 import { Label } from "ui";
 import { H3 } from "./typography";
+import { useSelector } from "react-redux";
 
 const LabelStyled = styled(Label)`
   display: block;
@@ -61,26 +62,26 @@ const Text = styled.p`
   word-break: break-word;
 `;
 
-type Props = {
-  title?: string;
-  text?: string;
-  imgUrl?: string;
+const getState = (state: any) => {
+  return {
+    title: state.title.text || undefined,
+    description: state.description.text || undefined,
+    url: state.uploadImage.view,
+  };
 };
 
-export const Preview: React.FC<Props> = ({
-  title = "Укажите текст заголовка",
-  text = "Ведите текст уведомления",
-  imgUrl = "",
-}) => {
+export const Preview = () => {
+  const { title = "Укажите текст заголовка", description = "Ведите текст уведомления", url } = useSelector(getState);
+
   return (
     <>
       <LabelStyled>Предпростмотр</LabelStyled>
       <BoxWrapper>
         <Box>
-          <Image imgUrl={imgUrl} />
+          <Image imgUrl={url} />
           <Content>
             <H3>{title}</H3>
-            <Text>{text}</Text>
+            <Text>{description}</Text>
           </Content>
         </Box>
       </BoxWrapper>

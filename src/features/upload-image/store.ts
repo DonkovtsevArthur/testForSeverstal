@@ -1,4 +1,6 @@
-import { AnyAction, Dispatch } from "redux";
+import { AnyAction, Dispatch, Store } from "redux";
+import axios from "axios";
+import { getImageFileReader, getParamsImage } from "./helpers";
 
 const VIEW_IMAGE_SETTLED = "uploadImage/VIEW_IMAGE_SETTLED";
 const URL_IMAGE_SETTLED = "uploadImage/URL_IMAGE_SETTLED";
@@ -9,7 +11,7 @@ const ERROR_IMAGE_CLEARED = "uploadImage/ERROR_IMAGE_CLEARED";
 
 const initialState = {
   url: "",
-  view: "",
+  view: undefined,
   isError: false,
   textError: [],
 };
@@ -43,7 +45,7 @@ export const uploadImage = (state = initialState, { type, payload }: AnyAction) 
       return {
         ...state,
         isError: true,
-        textError: [...state.textError, payload],
+        textError: payload,
       };
 
     case ERROR_IMAGE_CLEARED:
@@ -71,7 +73,7 @@ export const setErrorImage = (text: string) => ({
   payload: text,
 });
 
-export const setErrorsImage = (text: string) => ({
+export const setErrorsImage = (text: string[]) => ({
   type: ERRORS_IMAGE_SETTLED,
   payload: text,
 });
@@ -84,32 +86,48 @@ export const clearErrorImage = () => ({
   type: ERROR_IMAGE_CLEARED,
 });
 
-export const setViewImage = ({
-  view,
-  width,
-  height,
-  alpha,
-  error = [],
-}: {
-  view?: string;
-  width?: number;
-  height?: number;
-  error?: string[];
-  alpha?: 1 | 0;
-}) => (dispatch: Dispatch) => {
+type SetViewImage = {
+  view: string;
+  width: number;
+  height: number;
+  alpha: 1 | 0;
+};
+
+export const setViewImage = ({ view, width, height, alpha }: SetViewImage) => (dispatch: Dispatch) => {
   const isSize = width === 512 && height === 512;
   const is32Bit = alpha === 1;
-  if (width && error.length) {
-    dispatch(clearErrorImage());
-  } else if (!isSize) {
-    dispatch(setErrorsImage(`размер ${width}x${height}px`));
-  } else if (!is32Bit) {
-    dispatch(setErrorsImage(`не 32 разрядная PNG`));
+  let errors = [];
+
+  if (!isSize) {
+    errors.push(`размер ${width}x${height}px`);
+  }
+  if (!is32Bit) {
+    errors.push("не 32 разрядная PNG");
+  }
+  if (errors.length) {
+    dispatch(setErrorsImage(errors));
   }
 
   if (view && isSize && is32Bit) {
     dispatch({ type: VIEW_IMAGE_SETTLED, payload: view });
   }
+};
+
+const getBase64ImageFromFile = ({ data, dispatch }: { data: File; dispatch: Dispatch }) => {
+  getImageFileReader(data, async (upload) => {
+    const { result, alpha, width, height } = await getParamsImage(upload);
+    // @ts-ignore
+    dispatch(setViewImage({ view: result, width, height, alpha }));
+  });
+};
+
+export const setViewFromUrl = (value: string) => async (dispatch: Dispatch) => {
+  const { data } = await axios.get(value, { responseType: "blob" });
+  getBase64ImageFromFile({ data, dispatch });
+};
+
+export const setViewFromFile = (data: File) => async (dispatch: Dispatch) => {
+  getBase64ImageFromFile({ data, dispatch });
 };
 
 export const uploadImageSelector = (state: any) => state.uploadImage;

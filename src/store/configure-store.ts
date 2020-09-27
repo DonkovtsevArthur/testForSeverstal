@@ -4,11 +4,13 @@ import thunk from "redux-thunk";
 
 import { rootReducer } from "./root-reducer";
 
-const initialStore = (process.env.BROWSER && (window as any).REDUX_INITIAL_STORE) || {};
+const initialState = (process.env.BROWSER && (window as any).REDUX_INITIAL_STATE) || {};
 
 export const middlewares = [thunk];
 
-const IS_DEVELOPMENT = process.env.NODE_ENV !== `production`;
-const enhancer = IS_DEVELOPMENT ? composeWithDevTools(applyMiddleware(...middlewares)) : applyMiddleware(...middlewares);
+const IS_DEVELOPMENT = process.env.NODE_ENV === `production`;
+const enhancer = IS_DEVELOPMENT
+  ? composeWithDevTools(applyMiddleware(...middlewares))
+  : applyMiddleware(...middlewares);
 
-export const store = createStore<any, AnyAction, {}, {}>(rootReducer, initialStore, enhancer);
+export const store = createStore<any, AnyAction, {}, {}>(rootReducer, initialState, enhancer);

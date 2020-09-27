@@ -4,7 +4,7 @@ FROM mhart/alpine-node:12
  
 # A directory within the virtualized Docker environment
 # Becomes more relevant when using Docker Compose later
-WORKDIR /usr/src/app
+WORKDIR /usr/src/app/build
  
 # Copies package.json and package-lock.json to Docker environment
 COPY package*.json ./
