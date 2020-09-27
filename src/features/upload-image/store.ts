@@ -99,7 +99,7 @@ export const setFileToView = ([file]: FileList) => (dispatch: Dispatch) => {
     }
 
     if (!is32Bit) {
-      dispatch(setError("не 32 разрядная PNG"));
+      dispatch(setError("не 32-разрядная PNG"));
     }
 
     if (result && isSize && is32Bit) {

@@ -69,13 +69,13 @@ const Text = styled.p`
 `;
 
 export const Preview = () => {
-  const { title = "Укажите текст заголовка", description = "Ведите текст уведомления", uploadImage } = useSelector(
+  const { title = "Укажите текст заголовка", description = "Введите текст уведомления", uploadImage } = useSelector(
     getStateDefault(["title", "description", "uploadImage"]),
   );
 
   return (
     <PreviewStyled>
-      <LabelStyled>Предпростмотр</LabelStyled>
+      <LabelStyled>Предпросмотр</LabelStyled>
       <BoxWrapper>
         <Box>
           <Image imgUrl={uploadImage} />

@@ -1,12 +1,12 @@
 import { cancelBlurElement } from "library/cancel-blur-element";
-import { Analyst } from "pages/analyst";
-import { Push } from "pages/push";
+import { Analyst } from "pages/Analyst";
+import { Push } from "pages/Push";
+
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
-
-import { AnalystIcon } from "../../../ui/icons/analyst";
-import { PushIcon } from "../../../ui/icons/push";
+import { AnalystIcon } from "ui/icons/analyst";
+import { PushIcon } from "ui/icons/push";
 
 const SideBarStyled = styled.nav`
   display: flex;
@@ -90,7 +90,6 @@ export const SideBar = () => {
   );
 };
 
-// helpers
 type LocationType = {
   pathname: string;
 };
