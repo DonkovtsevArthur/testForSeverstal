@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "theme/respond";
 
 export const H2 = styled.h2`
   font-style: normal;
@@ -22,6 +23,11 @@ export const P = styled.p.attrs((props) => props)<{ italic?: boolean }>`
   font-weight: 400;
   font-size: 14px;
   line-height: 18px;
+
+  @media ${device.tablet} {
+    font-size: 14px;
+    line-height: 18px;
+  }
 `;
 
 export const textSm = styled(P)`

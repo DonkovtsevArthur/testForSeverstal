@@ -11,6 +11,7 @@ import { ClearIconButton } from "ui/clear-icon-button";
 import { InfoForUploadImage } from "ui/info-for-upload-image";
 import { Preloader } from "ui/preloader";
 import { getErrorFormSelector } from "features/form/store";
+import { device } from "theme/respond";
 
 const UploadImageFileStyled = styled(FormWrapper)`
   position: relative;
@@ -19,7 +20,11 @@ const UploadImageFileStyled = styled(FormWrapper)`
 
 const UploadImageStyled = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+
+  @media ${device.tablet} {
+    flex-direction: row;
+  }
 `;
 
 export const UploadImage = () => {

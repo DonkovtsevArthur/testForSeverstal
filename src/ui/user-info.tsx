@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { device } from "theme/respond";
 import { ArrowUpIcon } from "./icons/arrow-up";
 
 const UserStyled = styled.div`
@@ -9,8 +10,17 @@ const UserStyled = styled.div`
 `;
 
 const UserName = styled.div`
-  font-size: 18px;
+  width: 100px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+
+  font-size: 14px;
   color: ${({ theme }) => theme.colors.blue};
+  @media ${device.tablet} {
+    font-size: 18px;
+    flex-wrap: nowrap;
+  }
 `;
 
 const Avatar = styled.div`
@@ -19,7 +29,11 @@ const Avatar = styled.div`
   height: 50px;
   border-radius: 50%;
   background: ${({ theme }) => theme.colors.lavenderLight};
-  margin: 0 20px;
+  margin: 0 5px;
+
+  @media ${device.tablet} {
+    margin: 0 20px;
+  }
 `;
 
 const Menu = styled.div`
@@ -57,7 +71,9 @@ const Menu = styled.div`
 export const UserInfo = () => {
   return (
     <UserStyled>
-      <UserName>Severstal\av.baruzdin</UserName>
+      <UserName>
+        Severstal\<span>av.baruzdin</span>
+      </UserName>
       <Avatar />
       <Menu>
         <ArrowUpIcon />

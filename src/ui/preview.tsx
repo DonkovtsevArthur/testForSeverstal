@@ -5,40 +5,72 @@ import { Label } from "ui";
 import { H3 } from "./typography";
 import { useSelector } from "react-redux";
 import { getStateDefault } from "store/library";
+import { device } from "theme/respond";
 
 const PreviewStyled = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+  @media ${device.tablet} {
+    width: auto;
+  }
 `;
 
 const LabelStyled = styled(Label)`
   display: block;
-  margin-bottom: 22px;
+  margin-bottom: 0;
+  @media ${device.tablet} {
+    margin-bottom: 22px;
+  }
 `;
 
 const BoxWrapper = styled.div`
   display: block;
   position: relative;
-  width: 449px;
-  height: 174px;
+  width: 100%;
+  height: 145px;
   background-image: url(${viewIcon});
-  background-size: cover;
   background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+
+  @media ${device.tablet} {
+    width: 397px;
+    height: 152px;
+    background-size: cover;
+    background-position: initial;
+  }
+
+  @media ${device.desktop} {
+    width: 449px;
+    height: 174px;
+  }
 `;
 
 const Box = styled.div`
   display: flex;
   flex-direction: row;
-  width: 392px;
+  width: 230px;
   max-height: 122px;
   background-color: ${({ theme }) => theme.colors.white};
-  box-shadow: 0px 10px 20px rgba(145, 160, 201, 0.2);
+  box-shadow: 0 10px 20px rgba(145, 160, 201, 0.2);
   border-radius: 13.7544px;
-  padding: 16px;
+  padding: 10px;
   position: absolute;
-  top: 64px;
+  top: 50px;
   left: 50%;
   transform: translate(-50%, 0);
+
+  @media ${device.tablet} {
+    top: 55px;
+    width: 350px;
+    padding: 16px;
+  }
+
+  @media ${device.desktop} {
+    top: 65px;
+    width: 392px;
+  }
 `;
 
 const Image = styled.div<{ imgUrl: string }>`
@@ -60,12 +92,23 @@ const Content = styled.div`
   overflow: auto;
 `;
 
+const H3Styled = styled(H3)`
+  font-size: 15px;
+  @media ${device.tablet} {
+    font-size: 18px;
+  }
+`;
+
 const Text = styled.p`
   font-weight: normal;
-  font-size: 12px;
+  font-size: 10px;
   line-height: 15px;
   color: ${({ theme }) => theme.colors.blue};
   word-break: break-word;
+
+  @media ${device.tablet} {
+    font-size: 12px;
+  }
 `;
 
 export const Preview = () => {
@@ -80,7 +123,7 @@ export const Preview = () => {
         <Box>
           <Image imgUrl={uploadImage} />
           <Content>
-            <H3>{title}</H3>
+            <H3Styled>{title}</H3Styled>
             <Text>{description}</Text>
           </Content>
         </Box>

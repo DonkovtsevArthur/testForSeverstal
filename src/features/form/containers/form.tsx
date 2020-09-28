@@ -7,6 +7,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getStateDefault } from "store/library";
 import styled from "styled-components";
+import { device } from "theme/respond";
 
 import { Preloader } from "ui/preloader";
 import { Button } from "../../../ui/button";
@@ -15,17 +16,29 @@ import { fetchForm, selector, setSubmitted } from "../store";
 
 const Wrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: flex-end;
+  @media ${device.tablet} {
+    flex-direction: row;
+  }
 `;
 
 const ButtonSubmit = styled(Button)`
-  min-width: 211px;
+  min-width: 100%;
   height: 55px;
-  margin-left: 79px;
-  margin-bottom: 5px;
-  padding-left: 0px;
-  padding-right: 0px;
+  margin: 10px 0 0 0;
+
+  padding-left: 0;
+  padding-right: 0;
+
+  @media ${device.tablet} {
+    margin: 0 0 5px 13px;
+    min-width: 211px;
+  }
+  @media ${device.desktop} {
+    margin: 0;
+    margin-left: 79px;
+  }
 `;
 
 export const Form = () => {

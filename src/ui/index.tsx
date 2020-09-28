@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { device } from "theme/respond";
 
 export const Label = styled.label`
   display: flex;
@@ -25,6 +26,10 @@ export const Wrapper = styled.div<{ textError?: string }>`
           right: 0;
           bottom: -20px;
           color: ${({ theme }) => theme.colors.red};
+          font-size: 14px;
+          @media ${device.tablet} {
+            font-size: 16px;
+          }
         }
       `
     );
@@ -35,8 +40,12 @@ export const FormControlWrapper = styled.div<{ textError?: string }>`
   position: relative;
   display: flex;
   flex-direction: column;
-  width: 685px;
+  width: 100%;
   margin-bottom: 22px;
+
+  @media ${device.desktop} {
+    width: 685px;
+  }
 
   ${({ textError = "" }) => {
     return (

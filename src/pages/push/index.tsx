@@ -4,9 +4,16 @@ import styled from "styled-components";
 import { GlobalAds } from "pages/main/ui/global-ads";
 import { Tab, TabList, Tabs } from "ui/tabs";
 import { Container } from "ui/container";
+import { device } from "theme/respond";
 
 const TabListWrapper = styled.div`
-  padding: 43px 50px;
+  padding: 23px 10px 23px 10px;
+  @media ${device.tablet} {
+    padding: 43px 30px 43px 30px;
+  }
+  @media ${device.desktop} {
+    padding: 43px 0 43px 50px;
+  }
 `;
 
 const PushContainer = styled(Container)`

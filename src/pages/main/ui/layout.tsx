@@ -15,7 +15,7 @@ const Container = styled.div`
 
 const Content = styled.div`
   display: flex;
-  width: 80%;
+  width: 100%;
 `;
 
 export const Layout: React.FC = ({ children }) => {
