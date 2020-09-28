@@ -28,10 +28,10 @@ export const UploadImage = () => {
   const errorFromForm = useSelector(getErrorFormSelector);
 
   useEffect(() => {
-    if (!value && errorFromForm) {
+    if (!value && errorFromForm && !error.length) {
       dispatch(setError("Пустое поле"));
     }
-  }, [errorFromForm, value, dispatch]);
+  }, [errorFromForm, value, dispatch, error]);
 
   useEffect(() => {
     if (url && !error.length) {
