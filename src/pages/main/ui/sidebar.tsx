@@ -50,7 +50,7 @@ const LinkStyled = styled(NavLink)<{ text: string; isShowMenu: boolean }>`
 
   &.active {
     color: ${({ theme }) => theme.colors.blue};
-   
+  
     path,
     rect,
     circle {
@@ -58,8 +58,6 @@ const LinkStyled = styled(NavLink)<{ text: string; isShowMenu: boolean }>`
       stroke: ${({ theme }) => theme.colors.blueStroke};
     }
   }
-
-
 
   @media ${device.tablet} {
     &:active {
@@ -83,7 +81,6 @@ const LinkStyled = styled(NavLink)<{ text: string; isShowMenu: boolean }>`
     justify-content: flex-start;
   }
 
-  
 
   &:after {
     content: "${({ text, isShowMenu }) => (isShowMenu ? text : "")}";
@@ -114,9 +111,6 @@ const LinkStyled = styled(NavLink)<{ text: string; isShowMenu: boolean }>`
       stroke: ${({ theme }) => theme.colors.blueLight};
     }
   }
-
-
-  
 `;
 
 type SideBarType = {
@@ -135,12 +129,9 @@ export const SideBar = () => {
   const [isShowMenu, setShowMenu] = useState(true);
 
   const handleClick = () => {
-    console.log("fdfdf");
-
     setShowMenu((prevState) => !prevState);
   };
 
-  console.log("SideBar -> isShowMenu", isShowMenu);
   return (
     <SideBarStyled onClick={handleClick} isShowMenu={isShowMenu}>
       {sidebar.map(({ title, Icon, code }) => (
@@ -155,7 +146,6 @@ export const SideBar = () => {
           title={title}
         >
           <Icon />
-          {/* {isShowMenu && title} */}
         </LinkStyled>
       ))}
     </SideBarStyled>
