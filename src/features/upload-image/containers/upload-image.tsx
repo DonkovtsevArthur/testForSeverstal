@@ -31,7 +31,7 @@ export const UploadImage = () => {
     if (!value && errorFromForm && !error.length) {
       dispatch(setError("Пустое поле"));
     }
-  }, [errorFromForm, value, dispatch, error]);
+  }, [errorFromForm, value, dispatch]);
 
   useEffect(() => {
     if (url && !error.length) {

@@ -1,3 +1,4 @@
+import { KeyObject } from "crypto";
 import { AnyAction, Dispatch } from "redux";
 
 const FETCH_REQUESTED = "form/FETCH_FORM_REQUESTED";
@@ -47,9 +48,7 @@ const fetchFakePromise = (): Promise<{ status: number }> =>
     }, 1000);
   });
 
-export const fetchForm = (values: { title?: string; description?: string; uploadImage?: string }) => (
-  dispatch: Dispatch,
-) => {
+export const fetchForm = (values: { [id: string]: string }) => (dispatch: Dispatch) => {
   if (Object.values(values).every((value) => value)) {
     dispatch(setLoading());
     fetchFakePromise()
@@ -60,7 +59,8 @@ export const fetchForm = (values: { title?: string; description?: string; upload
       })
       .catch((error) => dispatch(setError(error)));
   } else {
-    dispatch(setError("Есть пустые поля"));
+    const keysValues = Object.keys(values).filter((key: string) => !values[key]);
+    dispatch(setError(`Есть пустые поля ${keysValues.join(", ")} ${Math.random()}`));
   }
 };
 
