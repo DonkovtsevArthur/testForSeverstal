@@ -50,7 +50,8 @@ const BoxWrapper = styled.div`
 const Box = styled.div`
   display: flex;
   flex-direction: row;
-  width: 230px;
+  max-width: 320px;
+  width: calc(100% - 15px);
   max-height: 122px;
   background-color: ${({ theme }) => theme.colors.white};
   box-shadow: 0 10px 20px rgba(145, 160, 201, 0.2);
@@ -64,6 +65,7 @@ const Box = styled.div`
   @media ${device.tablet} {
     top: 55px;
     width: 350px;
+    max-width: 100%;
     padding: 16px;
   }
 
